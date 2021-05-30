@@ -6,16 +6,21 @@ includes:
   deps: ../../tasks/deps.tasks.yml
 
 vars:
-  _taskfilename_: deps.conf-v4.yml
+  _taskfilename_: deps.docker.conf-v4.yml
+
+---
+
+items:
+
+  - key: os:install
+    value: |-
+      '
+      curl 
+      wget
+      '
 
 confs:
-  os:
-    - cmd: |-
-        echo '
-        RUN apt update -y \
-          && apt install -y \
-              ${items}
-        '
-items:
-  - os: 
-      - wget
+  os:install: 
+    default: |-
+      apt-get install -y ${items}
+  

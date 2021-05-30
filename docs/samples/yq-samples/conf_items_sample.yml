@@ -3,21 +3,57 @@ version: '3.0'
 vars:
   _mefilename_: conf_items_sample.yml
   _qv_render: |-
-    '.realnames as $names | .items[] | {"title":.title, "author": $names[.author]}'
+    '.confs as $names 
+    | .items[] 
+    | {
+        "key":.key, 
+        "value":.value,  
+        "bashcmd":"value=" + .value + " " + $names[.key].default,
+        "dockcmd": $names[.key].dockcmd,
+        "cmdt": $names[.key].default }
+    ' -j
 tasks:
+  
   default:
-    - task: render
-  render: |-
-    yq0 eval {{._qv_render}} {{._mefilename_}}
+    - task: render2
+  
+  render:
+    cmds:
+      - yq0 eval {{._qv_render}} {{._mefilename_}}
+    # sources:
+    #   - '{{._mefilename_}}'
+
+  render2:
+    cmds:
+      - cmd: |
+          task -t '{{._mefilename_}}' render \
+          | yq0 eval '.cmdt' -
 
 ---
 
 items:
-  - title: Frist psot
-    author: anon
-  - title: A well-written article
-    author: person1
-realnames:
-  anon: Anonymous Coward
-  person1: Person McPherson
+
+  - key: os:install
+    value: curl
+
+  # - key: pip:install
+  #   value: pydantic
+
+  # - key: pip:install
+  #   value: loguru
+
+confs:
+
+  os:install: 
+
+    default: |-
+      items={{.value}} apt-get install -y ${items}
+
+    dockcmd: |-
+      RUN apt-get update && \
+          items={{.value}} \
+          apt-get install -y ${items}
+  
+  # pip:install: 
+  #   default: which ${value}
 
