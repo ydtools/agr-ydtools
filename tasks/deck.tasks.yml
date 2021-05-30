@@ -10,6 +10,14 @@ tasks:
   build:
     desc: build deck image
     cmds:
-      - docker-compose build
+      - task: docker:build
+      # - docker-compose build
+
+  docker:build:
+    desc: build deck image
+    dir: ../..
+    cmds:
+      - cmd: |-
+          docker build -f ${DECK_PATH_KEY__DOCKERFILE} -t ${DECK_DIMAGE_MAIN__IMAGE} .
   
   

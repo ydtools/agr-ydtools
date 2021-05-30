@@ -1,4 +1,5 @@
 version: '3'
+dotenv: ['.env']
 includes:
   deck: ../../tasks/deck.tasks.yml
 
