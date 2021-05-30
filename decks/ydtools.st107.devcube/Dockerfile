@@ -1,16 +1,11 @@
 FROM ubuntu:18.04
 
-###
-# RUN apt update -y \
-#     && apt install -y \
-#        ${items}
-###
-
 # .@@set=block.init block.manager=deps.docker.conf-v4.yml
 # .@@set=block.content={{ shell "task -t deps.docker.conf-v4.yml deps:gen-blocks" }}
 RUN apt-get update && items=' \
 curl \
 wget \
+git \
 ' apt-get install -y ${items}
 # .@@set=block.over
 

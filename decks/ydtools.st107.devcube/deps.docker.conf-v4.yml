@@ -8,6 +8,11 @@ includes:
 vars:
   _taskfilename_: deps.docker.conf-v4.yml
 
+tasks:
+  gen-blocks:
+    - task: deps:gen-blocks
+      vars:
+        items: yq e '.items' {{._taskfilename_}}
 ---
 
 items:
@@ -17,6 +22,7 @@ items:
       ' \
       curl \
       wget \
+      git \
       '
 
 confs:
