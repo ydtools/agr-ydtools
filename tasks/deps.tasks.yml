@@ -36,13 +36,19 @@ tasks:
   gen-blocks:
     desc: generates blocks
     cmds:
+      - echo .
       - yq0 eval {{._kv_cmdt_query}} {{._taskfilename_}} {{._dock_cmd_render_}}
     silent: true
   
-  inline-blocks:
+  inline-dock-blocks:
     desc: generates blocks
     cmds:
-      - yq0 eval {{._kv_cmdt_query}} {{._taskfilename_}} {{._dock_cmd_render_}}
+      - cmd: |
+          python -c '
+          from pathlib import Path
+          text_orig = Path("Dockerfile").read_text()
+          text_orig.split("# .@@set=block.content.exp=deps:inline-dock-blocks")[1].split("# .@@set=block.over")
+          '
     silent: true
 
 # deps:gen-blocks | yq0 e '[.]' - -P | yq0 e '.[0].dockcmd' -
