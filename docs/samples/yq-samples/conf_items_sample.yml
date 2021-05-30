@@ -3,7 +3,7 @@ version: '3.0'
 vars:
   _mefilename_: conf_items_sample.yml
   _qv_render: |-
-    '.realnames as $names | .posts[] | {"title":.title, "author": $names[.author]}'
+    '.realnames as $names | .items[] | {"title":.title, "author": $names[.author]}'
 tasks:
   default:
     - task: render
@@ -12,7 +12,7 @@ tasks:
 
 ---
 
-posts:
+items:
   - title: Frist psot
     author: anon
   - title: A well-written article
