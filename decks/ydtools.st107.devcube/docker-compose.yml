@@ -1,0 +1,7 @@
+version: '3.2'
+services:
+  ydtools-devcube:
+    image: ${DECK_DIMAGE_MAIN__IMAGE}
+    build:
+      context: ../..
+      dockerfile: ${DECK_PATH_KEY__DOCKERFILE}

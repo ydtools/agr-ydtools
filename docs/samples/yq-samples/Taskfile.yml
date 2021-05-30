@@ -1,0 +1,7 @@
+version: '3.0'
+confs:
+  sample_yml:
+    a: 1
+    b: 2
+tasks:
+  to_entries: echo -E "{{.sample_yml}}" | yq0 eval 'to_entires' -

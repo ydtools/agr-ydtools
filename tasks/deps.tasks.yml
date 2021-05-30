@@ -1,0 +1,25 @@
+# https://taskfile.dev
+
+version: '3'
+
+
+vars:
+  _name_: deps tasks
+  
+  _required: |-
+    _taskfilename_: including filename
+  
+
+tasks:
+
+  list:
+    desc: list deps items
+    cmds:
+      - yq4 e '.items' {{._taskfilename_}}
+  
+  gen-blocks:
+    desk: generates blocks
+    cmds:
+      - cmd: |
+          yq4 e '.items' {{._taskfilename_}}
+    silent: true

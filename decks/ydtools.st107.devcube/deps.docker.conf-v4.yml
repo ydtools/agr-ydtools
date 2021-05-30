@@ -1,0 +1,21 @@
+#!/usr/local/bin/task --taskfile
+
+version: '3'
+
+includes:
+  deps: ../../tasks/deps.tasks.yml
+
+vars:
+  _taskfilename_: deps.conf-v4.yml
+
+confs:
+  os:
+    - cmd: |-
+        echo '
+        RUN apt update -y \
+          && apt install -y \
+              ${items}
+        '
+items:
+  - os: 
+      - wget
