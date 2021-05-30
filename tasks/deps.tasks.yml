@@ -44,7 +44,7 @@ tasks:
   inline-dock-blocks:
     desc: generates blocks
     cmds:
-      - cat Dockerfile | gucci
+      - cat Dockerfile | gucci | sed -z -e 's/\.@@set=block\.over.*\.@@set=block\.over/\.@@set=block\.over/g'
     silent: true
   
   inline-dock-blocks.py:

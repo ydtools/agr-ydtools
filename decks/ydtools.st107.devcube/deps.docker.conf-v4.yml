@@ -14,9 +14,9 @@ items:
 
   - key: os:install
     value: |-
-      '
-      curl 
-      wget
+      ' \
+      curl \
+      wget \
       '
 
 confs:
