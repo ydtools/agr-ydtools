@@ -1,12 +1,10 @@
-#!/usr/local/bin/task --taskfile
-
 version: '3'
 dotenv: ['.env']
-includes:
-  deps: ../../tasks/deps.tasks.yml
-
 vars:
-  _taskfilename_: deps.docker.conf-v4.yml
+  _taskfilename_: Taskfile.yml
+includes:
+  deck: ../../tasks/deck.tasks.yml
+  deps: ../../tasks/deps.tasks.yml
 
 tasks:
   gen-blocks:
@@ -24,6 +22,7 @@ tasks:
         | sed -z -e 's/\.@@set=block\.over.*\.@@set=block\.over/\.@@set=block\.over/g' \
         | tee _out_/Dockerfile
       - mv _out_/Dockerfile Dockerfile
+
 ---
 
 items:
