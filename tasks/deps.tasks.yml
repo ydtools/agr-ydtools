@@ -36,7 +36,7 @@ tasks:
   gen-blocks:
     desc: generates blocks
     cmds:
-      - echo '{''{' 'shell "task -t deps.docker.conf-v4.yml deps:gen-blocks"' '}''}'
+      - echo '{''{' 'shell "task deps:gen-blocks"' '}''}'
       - yq0 eval {{._kv_cmdt_query}} {{._taskfilename_}} {{._dock_cmd_render_}}
       - echo '# .@@set=block.over'
     silent: true

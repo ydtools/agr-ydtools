@@ -33,6 +33,7 @@ items:
       curl \
       wget \
       git \
+      yq \
       '
 
 confs:
