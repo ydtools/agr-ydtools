@@ -9,22 +9,13 @@ includes:
 tasks:
   gen-blocks:
     - task: deps:gen-blocks
-      vars:
-        items: yq e '.items' {{._taskfilename_}}
   
-  inline-dock-blocks:
-    desc: generates blocks
-    cmds:
-      - mkdir -p _out_
-      - |-
-        cat Dockerfile \
-        | gucci \
-        | sed -z -e 's/\.@@set=block\.over.*\.@@set=block\.over/\.@@set=block\.over/g' \
-        | tee _out_/Dockerfile
-      - mv _out_/Dockerfile Dockerfile
+  build:
+    - task: deps:inline-dock-blocks
+    - task: deck:docker:build
 
 ---
-
+kind: deps.docker.conf-v4.yml
 items:
 
   - key: os:install
