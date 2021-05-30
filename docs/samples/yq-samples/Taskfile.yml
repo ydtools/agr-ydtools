@@ -1,7 +1,27 @@
 version: '3.0'
 confs:
+  
   sample_yml:
     a: 1
     b: 2
+  
+  sample_items:
+    confs:
+      os:install: which {{.items}}
+
+    items:
+      - conf: os:install
+        items: 
+          - curl
+vars:
+  _qv_render: |-
+    '.realnames as $names | .posts[] | {"title":.title, "author": $names[.author]}'
 tasks:
-  to_entries: echo -E "{{.sample_yml}}" | yq0 eval 'to_entires' -
+  to_entries: yq0 eval '.confs.sample_yml | to_entries' Taskfile.yml
+  with_items: yq0 eval '.confs.sample_items | .items[0] | to_entries' Taskfile.yml
+  rslv_items: |-
+    cat Taskfile.yml \
+    | yq0 eval '.confs.sample_items' \
+    - \
+    | yq0 eval '.confs as $lukp_confs | .items[] | {"conf":.conf} ' -
+# , "cmd": $lukp_confs[.conf]}

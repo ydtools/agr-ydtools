@@ -1,0 +1,23 @@
+#!/usr/local/bin/task --taskfile
+version: '3.0'
+vars:
+  _mefilename_: lookup_sample.yml
+  _qv_render: |-
+    '.realnames as $names | .posts[] | {"title":.title, "author": $names[.author]}'
+tasks:
+  default:
+    - task: render
+  render: |-
+    yq0 eval {{._qv_render}} {{._mefilename_}}
+
+---
+
+"posts":
+  - "title": Frist psot
+    "author": anon
+  - "title": A well-written article
+    "author": person1
+"realnames":
+  "anon": Anonymous Coward
+  "person1": Person McPherson
+
