@@ -5,24 +5,11 @@ networks:
     external: true
     name: ${DECK_DCL_NETWORK}
 
-volumes:
-  lm_data:
-
 services:
-  lms3:
-    image: minio/minio
+  test-e2e:
+    image: ${DECK_DIMAGE_MAIN__IMAGE}
+    command: "bash -c 'cat /_confs/rclone.conf && rclone mkdir lms3:do-ob && rclone lsd lms3: | grep do-ob'"
     environment:
-      - MINIO_ROOT_USER=admin 
-      - MINIO_ROOT_PASSWORD=password
-    ports:
-      - "${DECK_lms3_PORT}:9000"
-    volumes:
-      - "lm_data:/data:rw"
-    command: server /data
-
-  lmhttp:
-    image: pierrezemb/gostatic
-    volumes:
-      - "lm_data:/srv/http:ro"
-    ports:
-      - "8043:8043"
+      - RCLONE_CONFIG=/_confs/rclone.conf
+    volumes: 
+      - "/home/yairda/_wd/ydtools/agr-ydtools/decks/ydtools.st223.test-plex/rclone.conf.local-brigde.toml:/_confs/rclone.conf"

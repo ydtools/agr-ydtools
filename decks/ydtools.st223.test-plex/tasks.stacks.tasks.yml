@@ -15,4 +15,14 @@ tasks:
       - |
         docker-compose \
         -f vparts/local-infra-ring/docker-compose.yml \
+        up -d
+  
+  spin:up/local-test-ring:
+    desc: _
+    deps:
+      - task: ensure:network
+    cmds:
+      - |
+        docker-compose \
+        -f vparts/local-test-ring/docker-compose.yml \
         up
