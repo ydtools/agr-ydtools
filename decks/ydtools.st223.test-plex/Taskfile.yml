@@ -5,6 +5,7 @@ vars:
 includes:
   deck: ../../tasks/deck.tasks.yml
   deps: tasks.deps.tasks.yml
+  stacks: tasks.stacks.tasks.yml
 
 tasks:
   gen-blocks:

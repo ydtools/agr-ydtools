@@ -1,0 +1,18 @@
+version: '3'
+tasks:
+  ensure:network:
+    desc: _
+    cmds:
+      - docker network create -d bridge ${DECK_DCL_NETWORK}
+    status:
+      - docker network inspect ${DECK_DCL_NETWORK} | jq '.[0].Driver' | grep -v Bridge
+  
+  spin:up/local-infra-ring:
+    desc: _
+    deps:
+      - task: ensure:network
+    cmds:
+      - |
+        docker-compose \
+        -f vparts/local-infra-ring/docker-compose.yml \
+        up
