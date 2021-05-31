@@ -8,7 +8,11 @@ Path = str
 def sh(cmd, **kw):
     shell = spur.LocalShell()
     cmd_tokens=shlex.split(cmd)
-    res = shell.run(cmd_tokens)
+    import os
+    update_env = {
+        'RCLONE_CONFIG': os.environ.get('RCLONE_CONFIG_FILE__HOST_EXT'),
+    }
+    res = shell.run(cmd_tokens, update_env=update_env)
     return res.output.decode()
 
 def tree(source:Path) -> str:
@@ -50,7 +54,7 @@ def copy(source:Path, dest:Path):
     return sh(f"rclone copy {source} {dest}")
 
 def copyto(source:Path, dest:Path):
-    return sh(f"rclone.tskr copy source={source} dest={dest}")
+    return sh(f"rclone copyto {source} {dest}")
 
 def get_data(source):
     import io

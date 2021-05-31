@@ -51,17 +51,6 @@ tasks:
         | sed -z -e 's/\.@@set=block\.over.*\.@@set=block\.over/\.@@set=block\.over/g' \
         | tee _out_/Dockerfile
       - mv _out_/Dockerfile Dockerfile
-
     silent: true
   
-  inline-dock-blocks.py:
-    desc: generates blocks
-    cmds:
-      - cmd: |
-          python -c '
-          from pathlib import Path
-          text_orig = Path("Dockerfile").read_text()
-          text_orig.split("# .@@set=block.content.exp=deps:inline-dock-blocks")[1].split("# .@@set=block.over")
-          '
-    silent: true
 # deps:gen-blocks | yq0 e '[.]' - -P | yq0 e '.[0].dockcmd' -

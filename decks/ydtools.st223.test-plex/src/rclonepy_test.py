@@ -20,8 +20,12 @@ def test_rclone_tree2():
     me_parent_p = Path(__file__).parent
     name = Path(__file__).name
 
-    the_data = rclonepy.get_data('minio:test-b/hw.text.txt')
-    assert 'Hello' in the_data
+    src = str(Path(__file__).absolute())
+    
+    rclonepy.copyto(source=src, dest='lms3:test-b/hw.text.txt')
+    the_data = rclonepy.get_data('lms3:test-b/hw.text.txt')
+
+    assert 'test_rclone_tree2' in the_data
 
 def test_rclone_tree3():
     import urllib.request as urlreq
@@ -36,3 +40,6 @@ def test_rclone_tree3():
     urlreq.install_opener(opener)
     print(urlreq.urlopen("python://something/random/file.txt").read())
     print(len(urlreq.urlopen("http://example.com").read()))
+
+if __name__ == '__main__':
+    test_rclone_tree2()

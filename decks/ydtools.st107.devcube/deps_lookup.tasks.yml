@@ -16,7 +16,7 @@ vars:
         "key":.key, 
         "value":.value,  
         "bashcmd":"items="+.value + " " + $names[.key].default,
-        "dockcmd":"RUN apt-get update && "  + $names[.key].default + ".value + " ",
+        "dockcmd":"RUN apt-get update &&  apt-get install -y "+.value + " ",
         "cmdt":$names[.key].default }
     ' -j
   _dock_cmd_render_: |-

@@ -1,0 +1,6 @@
+version: '3'
+vars:
+  _taskfilename_: task_test.tasks.yml
+tasks:
+  test-rclone:
+    - rclone

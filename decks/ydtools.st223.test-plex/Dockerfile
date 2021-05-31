@@ -23,4 +23,4 @@ RUN yq4 -V
 RUN curl https://rclone.org/install.sh | bash
 RUN rclone version
 
-RUN uname -r
+RUN  echo 
