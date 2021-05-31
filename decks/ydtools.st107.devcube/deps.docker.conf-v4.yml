@@ -3,7 +3,7 @@
 version: '3'
 dotenv: ['.env']
 includes:
-  deps: ../../tasks/deps.tasks.yml
+  deps: deps_lookup.tasks.yml
 
 vars:
   _taskfilename_: deps.docker.conf-v4.yml

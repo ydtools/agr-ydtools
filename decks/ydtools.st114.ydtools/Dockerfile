@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM python:3.7-stretch
 
 # .@@set=block.init block.manager.kind=deps.docker.conf-v4.yml
 # .@@set=block.content={{ shell "task deps:gen-blocks" }}
