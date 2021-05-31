@@ -5,7 +5,7 @@ def test__s3path__api():
     from botocore.client import Config
     minio_resource = boto3.resource(
         's3',
-        endpoint_url='http://localhost:9000',
+        endpoint_url='http://localhost:29029',
         aws_access_key_id='admin',
         aws_secret_access_key='password',
         config=Config(signature_version='s3v4'),
