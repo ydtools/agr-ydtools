@@ -20,7 +20,7 @@ tasks:
   spin:up/local-test-ring:
     desc: _
     deps:
-      - task: ensure:network
+      - task: spin:up/local-infra-ring
     cmds:
       - |
         docker-compose \
