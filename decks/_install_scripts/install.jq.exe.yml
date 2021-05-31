@@ -10,7 +10,7 @@ vars:
   tmp_dest_parent: /tmp/yq_install
   dest_parent: /usr/local/bin
   dest_name: yq0
-
+  jq: https://github.com/stedolan/jq/releases/download/jq-1.6/jq-linux64
 tasks:
 
   default:
