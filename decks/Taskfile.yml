@@ -26,6 +26,8 @@ tasks:
   
   
   _tmux:new:
+    desc: https://buildmedia.readthedocs.org/media/pdf/tmuxp/latest/tmuxp.pdf
+    sample: https://github.com/tmux-python/tmuxp/blob/master/.tmuxp.yaml
     vars:
       name: "$(echo {{.dir}} | cut -d'/' -f2 | cut -d'.' -f3)"
     cmds:
@@ -43,7 +45,9 @@ tasks:
       - |
         tmux new-session -d -s {{.TASK}}
         tmux rename-window -t 0 'Main'
-        tmux send-keys -t 'Main' 'conda activate ydtools' C-m 'clear' C-m # Switch to bind script?
+        tmux send-keys -t 'Main' 'conda activate ydtools' C-m 'htop' C-m # Switch to bind script?
+      # tmux send-keys -t 'Main' 'conda activate ydtools' C-m 'glances' C-m # Switch to bind script?
+
 
       - task: aux:multi-cmd
         vars:
