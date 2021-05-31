@@ -15,7 +15,7 @@ vars:
     | {
         "key":.key, 
         "value":.value,  
-        "bashcmd":"items="+.value + " " + $names[.key].default,
+        "bashcmd":"sudo apt-get install -y " +.value,
         "dockcmd":"RUN apt-get update &&  apt-get install -y " +.value,
         "cmdt":$names[.key].default }
     ' -j

@@ -23,6 +23,7 @@ items:
       bash \
       curl \
       wget \
+      unzip \
       git
 
 confs:

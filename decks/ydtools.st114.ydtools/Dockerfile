@@ -5,6 +5,7 @@ FROM ubuntu:18.04
 RUN apt-get update &&  apt-get install -y bash \
 curl \
 wget \
+unzip \
 git
 # .@@set=block.over
 RUN curl --help
@@ -15,6 +16,11 @@ RUN  cd /tmp/ \
      | sh && chmod +x ./bin/task \
      && mv ./bin/task /usr/local/bin/task
 RUN  ls /usr/local/bin/task
-# task -t /decks/_install_scripts/install.yq.exe.yml
+
+RUN task -t /decks/_install_scripts/install.yq.exe.yml -o prefixed
+RUN yq4 -V
+
+RUN curl https://rclone.org/install.sh | bash
+RUN rclone version
 
 RUN uname -r

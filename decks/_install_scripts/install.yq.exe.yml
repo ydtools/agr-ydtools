@@ -4,12 +4,12 @@ version: '3.0'
 
 dotenv: ['.env']
 vars:
-  _sudo: $(which sudo &> /dev/null && echo sudo)
+  _sudo: $(which sudo &> /dev/null && echo sudo || echo '')
   src_upath_fmt: |-
     https://github.com/mikefarah/yq/releases/download/${YDT_YQ4__VERSION_STR:-${VERSION}}/${YDT_YQ4__BINARY_NAME:-${BINARY}}
   tmp_dest_parent: /tmp/yq_install
   dest_parent: /usr/local/bin
-  dest_name: yq0
+  dest_name: yq4
 tasks:
 
   default:
