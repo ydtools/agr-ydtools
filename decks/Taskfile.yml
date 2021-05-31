@@ -15,14 +15,66 @@ tasks:
   test-all:
     desc: +
     vars:
-      deck_dirs_exp: find . -type d -name 'ydtools*'
+      deck_dirs_exp: find . -type d -name 'ydtools*' 
     cmds:
       - task: aux:multi-cmd
+      # - task: aux:multi-cmd:tmux
         vars:
+          key: "{{.TASK}}"
           items: $({{.deck_dirs_exp}})
-          cmd: task test -d % --summary
+          cmd: task test -d %
+  
+  
+  _tmux:new:
+    vars:
+      name: "$(echo {{.dir}} | cut -d'/' -f2 | cut -d'.' -f3)"
+    cmds:
+      - echo "{{.dir}} => {{.name}} {{.cmd}}"
+      - tmux new-window -n "{{.name}}" -t test-all-3
+      - tmux send-keys -t "{{.name}}" 'conda activate ydtools' C-m  '{{.cmd}}' C-m # Switch to bind script?
+
+
+  test-all-3:
+    desc: +
+    vars:
+      deck_dirs_exp: find . -type d -name 'ydtools*'
+    cmds:
+      - tmux kill-session -t {{.TASK}} || true
+      - |
+        tmux new-session -d -s {{.TASK}}
+        tmux rename-window -t 0 'Main'
+        tmux send-keys -t 'Main' 'conda activate ydtools' C-m 'clear' C-m # Switch to bind script?
+
+      - task: aux:multi-cmd
+        vars:
+          key: "{{.TASK}}"
+          items: $({{.deck_dirs_exp}})
+          cmd: task _tmux:new dir=% cmd="task test -d %"
+      - tmux attach -t {{.TASK}}
 
   aux:multi-cmd:
+    desc: _
+    vars:
+      ohm: 1
+    cmds:
+      - |-
+        items_cnt=$(echo -E "{{.items}}" | wc -l)
+        echo -E "{{.items}}" \
+        | xargs -n 1 | xargs -I% \
+        {{.cmd}}
+  
+  aux:multi-cmd:xargs:
+    desc: _
+    vars:
+      ohm: 1
+    cmds:
+      - |-
+        items_cnt=$(echo -E "{{.items}}" | wc -l)
+        echo -E "{{.items}}" \
+        | xargs -n 1 | xargs -I% \
+        {{.cmd}}
+  
+  aux:multi-cmd:tmux:
     desc: _
     vars:
       ohm: 1

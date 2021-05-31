@@ -1,0 +1,27 @@
+session_name: 2-windows
+# start_directory: ./ # load session relative to config location (project root).
+# before_script: ./.tmuxp-before-script.sh
+# shell_command_before:
+# - '[ -f .venv/bin/activate ] && source .venv/bin/activate && reset'
+windows:
+- window_name: dev window
+  # layout: main-horizontal
+  # start_directory: docs/
+  # shell_command_before:
+  #   - cd ~/                    # run as a first command in all panes
+  options:
+    main-pane-height: 35
+  panes:
+    - ls
+    - pwd
+- window_name: test window
+  # layout: main-horizontal
+  # start_directory: docs/
+  # shell_command_before:
+  #   - cd ~/                    # run as a first command in all panes
+  options:
+    main-pane-height: 35
+  panes:
+    - ls
+    - pwd
+# /home/yairda/.local/bin

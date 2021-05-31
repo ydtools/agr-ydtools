@@ -6,7 +6,7 @@ includes:
 tasks:
 
   build:
-    - task: deck:build
+    - task: deck:docker:build
 
   test:
     - task: build
