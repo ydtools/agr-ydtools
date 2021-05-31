@@ -1,0 +1,6 @@
+
+tasks:
+  copy: rclone copy {{.source}} {{.dest}}
+  ls: rclone ls {{.source}}
+  
+    
