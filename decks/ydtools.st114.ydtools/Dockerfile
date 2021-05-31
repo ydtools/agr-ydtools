@@ -2,12 +2,10 @@ FROM ubuntu:18.04
 
 # .@@set=block.init block.manager.kind=deps.docker.conf-v4.yml
 # .@@set=block.content={{ shell "task deps:gen-blocks" }}
-RUN apt-get update\
-    && apt-get install -y \
-    bash \
-    curl \
-    wget \
-    git 
+RUN apt-get update &&  apt-get install -y bash \
+curl \
+wget \
+git
 # .@@set=block.over
 RUN curl --help
 
