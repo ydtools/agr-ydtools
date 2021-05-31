@@ -13,6 +13,14 @@ tasks:
   build:
     - task: deps:inline-dock-blocks
     - task: deck:docker:build
+  test: |-
+    bash -c '
+    PYTHONPATH=.
+    MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password _out_/minio server _out_/data &
+    sleep 3
+    pytest tests src -s
+    kill %-
+    '
 
 ---
 kind: deps.docker.conf-v4.yml
