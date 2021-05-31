@@ -3,3 +3,11 @@ dotenv: ['.env']
 includes:
   deck: ../../tasks/deck.tasks.yml
 
+tasks:
+
+  build:
+    - task: deck:build
+
+  test:
+    - task: build
+

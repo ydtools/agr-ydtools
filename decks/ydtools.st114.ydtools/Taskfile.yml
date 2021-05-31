@@ -14,6 +14,10 @@ tasks:
     - task: deps:inline-dock-blocks
     - task: deck:docker:build
 
+  test:
+    - task: build
+
+
 ---
 kind: deps.docker.conf-v4.yml
 items:

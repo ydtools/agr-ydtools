@@ -1,0 +1,34 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -l
+    silent: true
+
+  test-all:
+    desc: +
+    vars:
+      deck_dirs_exp: find . -type d -name 'ydtools*'
+    cmds:
+      - task: aux:multi-cmd
+        vars:
+          items: $({{.deck_dirs_exp}})
+          cmd: task test -d % --summary
+
+  aux:multi-cmd:
+    desc: _
+    vars:
+      ohm: 1
+    cmds:
+      - |-
+        items_cnt=$(echo -E "{{.items}}" | wc -l)
+        echo -E "{{.items}}" \
+        | xargs -n 1 | xargs -I% \
+        {{.cmd}}
