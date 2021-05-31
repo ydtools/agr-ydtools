@@ -1,0 +1,33 @@
+version: '3'
+dotenv: ['.env']
+vars:
+  _taskfilename_: Taskfile.yml
+includes:
+  deck: ../../tasks/deck.tasks.yml
+  deps: ../../tasks/deps.tasks.yml
+
+tasks:
+  gen-blocks:
+    - task: deps:gen-blocks
+  
+  build:
+    - task: deps:inline-dock-blocks
+    - task: deck:docker:build
+
+---
+kind: deps.docker.conf-v4.yml
+items:
+
+  - key: os:install
+    value: |-
+      bash \
+      curl \
+      wget \
+      unzip \
+      git
+
+confs:
+  os:install: 
+    default: |-
+      apt-get install -y {{.value}}
+  
